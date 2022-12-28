@@ -1,8 +1,13 @@
 package com.example.zgraphql.graphql
- class PersonResolver()
+import com.example.zgraphql.graphql.api.PersonsQueryResolver
+import com.example.zgraphql.graphql.model.Person
+
+class PersonResolver() : PersonsQueryResolver
      {
 
-    fun person(): PersonsQueryResolver {
-        return "Works"
+    override fun persons(): List<com.example.zgraphql.graphql.model.Person> {
+        val person1 = Person("id1","name1")
+        val person2 = Person("id2","name2")
+        return listOf<Person>(person1, person2)
     }
 }

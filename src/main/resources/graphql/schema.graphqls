@@ -4,5 +4,5 @@ type Person {
 }
 
 type Query {
-  Persons: [Person]!
+  persons: [Person]!
 }
