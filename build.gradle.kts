@@ -1,5 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.regex.Pattern.compile
+import io.github.kobylynskyi.graphql.codegen.gradle.*
 
 plugins {
 	id("org.springframework.boot") version "3.0.1"
@@ -7,6 +7,9 @@ plugins {
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	kotlin("plugin.jpa") version "1.7.22"
+	id("io.github.kobylynskyi.graphql.codegen") version "5.5.0"
+
+
 }
 
 group = "com.example"
@@ -24,7 +27,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-graphql")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+
 	implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:15.0.0")
+	implementation ("com.graphql-java-kickstart:graphiql-spring-boot-starter:11.0.0")
+	implementation ("com.graphql-java:graphql-java-extended-scalars:16.0.1")
+
 	// testing facilities
 	testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:15.0.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -45,4 +52,24 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.named<GraphQLCodegenGradleTask>("graphqlCodegen") {
+	// all config options:
+	// https://github.com/kobylynskyi/graphql-java-codegen/blob/master/docs/codegen-options.md
+	graphqlSchemaPaths = listOf("$projectDir/src/main/resources/graphql/schema.graphqls")
+	outputDir = File("$buildDir/generated")
+	packageName = "com.example.graphql.model"
+	customTypesMapping = mutableMapOf(Pair("EpochMillis", "java.time.LocalDateTime"))
+	customAnnotationsMapping = mutableMapOf(Pair("EpochMillis", listOf("@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.example.json.EpochMillisScalarDeserializer.class)")))
+}
+
+// Automatically generate GraphQL code on project build:
+sourceSets {
+	getByName("main").java.srcDirs("$buildDir/generated")
+}
+
+// Add generated sources to your project source sets:
+tasks.named<JavaCompile>("compileJava") {
+	dependsOn("graphqlCodegen")
 }
