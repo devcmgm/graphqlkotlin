@@ -1,8 +1,0 @@
-spring:
-  profiles: default
-  data.mongodb:
-    host: localhost:27017
-    database: demo
-
-graphql:
-  packages: "com.example.demographql"
