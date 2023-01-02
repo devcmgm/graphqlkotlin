@@ -1,5 +1,8 @@
 spring.application.name: sample-spring-kotlin-microservice
 
-spring.graphql.schema.printer.enable: true
+#spring.graphql.schema.printer.enable: true
+spring.graphql.graphiql.enabled: true
+spring.graphql.graphiql.path: /graphiql
+
 spring.jpa.hibernate.ddl.auto: none
 management.endpoints.web.exposure.include: health,metrics

@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class HelloController(val helloService: HelloService) {
+class ZHelloController(val helloService: HelloService) {
 
-    @GetMapping("/hello")
+    @GetMapping("/zhello")
     fun helloKotlin(): String {
         return "hello world"
     }
 
-    @GetMapping("/hello-service")
+    @GetMapping("/zhello-service")
     fun helloKotlinService(): String {
         return helloService.getHello()
     }
 
-    @GetMapping("/hello-dto")
+    @GetMapping("/zhello-dto")
     fun helloDto(): HelloDto {
         return HelloDto("Hello from the dto")
     }

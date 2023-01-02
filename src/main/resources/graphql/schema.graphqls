@@ -4,5 +4,6 @@ type Person {
 }
 
 type Query {
-  persons: [Person]!
+  hellog: String!
 }
+

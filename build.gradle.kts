@@ -17,6 +17,9 @@ group = "com.example"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
+val graphqlKickstartVersion = "5.10.0"
+
+
 project.gradle.startParameter.excludedTaskNames.add("compileJava")
 project.gradle.startParameter.excludedTaskNames.add("compileTestJava")
 
@@ -25,6 +28,8 @@ repositories {
 }
 
 dependencies {
+
+
 // https://mavenlibs.com/maven/dependency/com.graphql-java-kickstart/graphql-java-tools
 	implementation("com.graphql-java-kickstart:graphql-java-tools:13.0.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -35,17 +40,23 @@ dependencies {
 	implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:15.0.0")
 	implementation ("com.graphql-java-kickstart:graphiql-spring-boot-starter:11.0.0")
 	implementation ("com.graphql-java:graphql-java-extended-scalars:20.0")
+	runtimeOnly("com.h2database:h2")
 
 
 	// testing facilities
+	/*
 	testImplementation("com.graphql-java-kickstart:graphql-spring-boot-starter-test:15.0.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	runtimeOnly("com.h2database:h2")
+	*/
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework:spring-webflux")
+
 	testImplementation("org.springframework.graphql:spring-graphql-test")
+
+	//compile("com.graphql-java-kickstart:graphql-spring-boot-starter:5.10.0")
+	//compile("com.graphql-java-kickstart:altair-spring-boot-starter:5.10.0")
 }
 
 tasks.withType<KotlinCompile> {
