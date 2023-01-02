@@ -7,3 +7,6 @@ type Query {
   hellog: String!
 }
 
+type Subscription {
+   demoSub1(someValue:[String]) : String!
+}
