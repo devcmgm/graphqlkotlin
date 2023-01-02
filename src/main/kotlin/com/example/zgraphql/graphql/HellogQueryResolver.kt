@@ -1,15 +1,15 @@
 package com.example.zgraphql.graphql
-import graphql.kickstart.tools.GraphQLQueryResolver
 import org.springframework.stereotype.Component
 
 // Example:
 // http://localhost:8080/graphiql?path=/graphql
+
 @Component
 class HellogQueryResolver() : com.example.zgraphql.graphql.api.HellogQueryResolver
      {
 
        override  fun hellog() : String {
-             return "Works now"
+             return "zac Works now"
          }
 
 }

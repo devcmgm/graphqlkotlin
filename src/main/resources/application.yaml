@@ -1,8 +1,37 @@
 spring.application.name: sample-spring-kotlin-microservice
 
+web:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD
+    max-age: 3600
+    allowed-headers: "Requestor-Type"
+    exposed-headers: "X-Get-Header"
+
+
 #spring.graphql.schema.printer.enable: true
 spring.graphql.graphiql.enabled: true
 spring.graphql.graphiql.path: /graphiql
 
 spring.jpa.hibernate.ddl.auto: none
 management.endpoints.web.exposure.include: health,metrics
+
+spring.graphql.cors.urls: http://localhost:3000
+
+graphql.servlet.corsEnabled: true
+
+graphql:
+  servlet:
+    # Sets if GraphQL servlet should be created and exposed. If not specified defaults to "true".
+    enabled: true
+    # Sets the path where GraphQL servlet will be exposed. If not specified defaults to "/graphql"
+    mapping: /graphql
+    cors-enabled: false
+    cors:
+      allowed-origins: http://localhost:3000
+      allowed-methods: GET, HEAD, POST
+    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+    exception-handlers-enabled: true
+    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+    # Sets if asynchronous operations are supported for GraphQL requests. If not specified defaults to true.
+    async-mode-enabled: true
